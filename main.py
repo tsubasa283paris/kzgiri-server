@@ -31,9 +31,5 @@ async def handler(request: Request, exc: RequestValidationError):
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY
     )
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
 app.include_router(themes.router)
 app.include_router(answers.router)
