@@ -75,6 +75,11 @@ class Answer(Base, TimestampMixin):
         String(128),
     )
 
+    likes = Column(
+        Integer,
+        default=0,
+    )
+
     theme_id = Column(
         ForeignKey("theme.id", ondelete="CASCADE"),
     )

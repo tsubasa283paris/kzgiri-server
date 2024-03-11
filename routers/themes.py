@@ -33,6 +33,7 @@ def read_theme(
             "id": db_answer.id,
             "text": db_answer.text,
             "userName": db_answer.user_name,
+            "likes": db_answer.likes,
             "createdAt": db_answer.created_at,
         })
     
