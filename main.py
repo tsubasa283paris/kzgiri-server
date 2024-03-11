@@ -3,6 +3,8 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from routers import themes, answers
+
 app = FastAPI()
 
 # add acceptable origins
@@ -11,8 +13,9 @@ app.add_middleware(
     allow_origins=[
         "http://localhost",
         "http://localhost:3000",
-        # "http://purple-archive.netlify.app",
-        # "https://purple-archive.netlify.app",
+        "http://localhost:3002",
+        "http://kzgiri-front.vercel.app/",
+        "https://kzgiri-front.vercel.app/",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -31,3 +34,6 @@ async def handler(request: Request, exc: RequestValidationError):
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+app.include_router(themes.router)
+app.include_router(answers.router)
