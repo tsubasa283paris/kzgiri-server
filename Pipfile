@@ -9,9 +9,9 @@ sqlalchemy = "*"
 uvicorn = "*"
 mysql-connector-python = "*"
 alembic = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
-python_full_version = "3.8.18"

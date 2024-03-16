@@ -1,11 +1,18 @@
+import os
 from logging.config import fileConfig
 
+from dotenv import load_dotenv
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
 
 from sql_interface.models import Base
+
+
+# load .env
+load_dotenv()
+userhost = os.environ.get("DATABASE_USERHOST")
 
 
 # this is the Alembic Config object, which provides
@@ -15,7 +22,7 @@ section = config.config_ini_section
 config.set_section_option(
     section,
     "DATABASE_URL",
-    "mysql+mysqlconnector://root@localhost/kzgiri",
+    f"mysql+mysqlconnector://{userhost}/kzgiri",
 )
 
 # Interpret the config file for Python logging.

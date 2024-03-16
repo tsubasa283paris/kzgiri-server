@@ -1,9 +1,14 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from routers import themes, answers
+
+
+# load .env
+load_dotenv()
 
 app = FastAPI()
 
