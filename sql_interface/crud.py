@@ -4,7 +4,7 @@ from typing import List
 
 from sqlalchemy.orm import Session
 
-from . import models, schemas
+from . import models
 
 # ----------------------------------------------------------------
 # theme
