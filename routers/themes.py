@@ -26,13 +26,16 @@ def read_theme(
             detail="Specified theme does not exist."
         )
     
+    dt_now = datetime.datetime.now()
+    is_released = dt_now >= db_theme.released_at
+    
     get_answers_result = crud.get_answers(db, theme_id)
     answers = []
     for db_answer in get_answers_result.answers:
         answers.append({
             "id": db_answer.id,
             "text": db_answer.text,
-            "userName": db_answer.user_name,
+            "userName": db_answer.user_name if is_released else None,
             "likes": db_answer.likes,
             "createdAt": db_answer.created_at,
         })
