@@ -1,3 +1,5 @@
+import datetime
+
 from fastapi import Depends, APIRouter, HTTPException, status
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -31,6 +33,13 @@ def create_answer(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Specified theme does not exist."
+        )
+    
+    dt_now = datetime.datetime.now()
+    if db_theme.released_at < dt_now:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="The theme is already released."
         )
     
     created_answer = crud.create_answer(db, params.text,
