@@ -105,7 +105,7 @@
   - <https://zenn.dev/jeffi7/articles/10f7b12d6044ad>  
     上記記事など参考に開発環境用の独自CA、サーバ証明書を作成する。  
     ここでは独自CAの証明書を `~/.myCA/localCA.crt`、サーバ証明書を `~/.myCA/localhost.crt` として作成したものとする。
-  - サーバ証明書をUbuntuにインストールする。  
+  - 独自CAの証明書をUbuntuにインストールする。  
     ```
     sudo cp ~/.myCA/localCA.crt /usr/share/ca-certificates/
     sudo sh -c "echo 'localCA.crt' >> /etc/ca-certificates.conf"
