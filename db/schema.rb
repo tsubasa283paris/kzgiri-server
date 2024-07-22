@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_21_161532) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_22_141435) do
   create_table "topics", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "text"
+    t.string "text", default: "", null: false
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
