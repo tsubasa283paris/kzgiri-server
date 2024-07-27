@@ -36,3 +36,6 @@
 
 # yard
 .yardoc/
+
+# node_modules for prettier
+node_modules/

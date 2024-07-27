@@ -52,4 +52,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'yard'
+  gem 'rubocop', require: false
+  gem 'prettier_print'
+  gem 'syntax_tree'
+  gem 'syntax_tree-haml'
+  gem 'syntax_tree-rbs'
 end

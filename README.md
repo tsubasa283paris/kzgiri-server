@@ -8,6 +8,7 @@
 - APIサーバ： Ruby on Rails
 - テスト： rspec
 - ドキュメンテーション： yard
+- linter： rubocop
 
 ## 環境構築
 
@@ -34,6 +35,8 @@
   rbenv install 3.3.3
   rbenv local 3.3.3
   ```
+
+- `bundle install` を実行する。
 
 ### MySQL関連
 
@@ -85,6 +88,26 @@
 
 「Ruby関連」完了後、`. yard.sh` を実行する。  
 ドキュメントのHTMLを返すサーバが起動するので、ブラウザから `localhost:8808` でアクセスする。
+
+### フォーマッタ
+
+（VSCodeにおける）自動フォーマットを行う場合、以下の手順に従う。
+
+- 拡張機能「Prettier `esbenp.prettier-vscode`」および「Prettier+ `svipas.prettier-plus`」をインストールする。
+
+- 当リポジトリのルートディレクトリにて `npm install` を実施する。
+
+- `settings.json` に以下のように記述する。  
+  ```json
+  "[ruby]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  ```
+
+### linter
+
+rubocopを導入しているため、`rubocop` コマンドで静的解析を実行できる。
 
 ## 実行
 
