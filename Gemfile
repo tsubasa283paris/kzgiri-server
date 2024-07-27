@@ -41,14 +41,14 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
 
   gem "rspec-rails", "~> 6.1.0"
-
+  # ...and its related:
   gem "factory_bot_rails"
   gem "faker"
 
   gem "yard"
 
   gem "rubocop", require: false
-
+  # ...and its related:
   gem "prettier_print", require: false
   gem "syntax_tree", require: false
   gem "syntax_tree-haml", require: false
