@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :answer do
-    username { "MyString" }
-    text { "MyString" }
-    topic { nil }
+    sequence(:username, "user_1")
+    sequence(:text, "Answer_1")
   end
 end

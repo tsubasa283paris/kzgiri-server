@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :topic do
-    text { "MyString" }
-    published_at { "2024-07-22 01:15:32" }
+    sequence(:text, "Topic_1")
+    published_at { 1.week.from_now.iso8601 }
   end
 end
