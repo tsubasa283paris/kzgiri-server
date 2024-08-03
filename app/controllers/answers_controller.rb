@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: %i[show update destroy]
+  before_action :set_answer, only: %i[update destroy]
 
   # POST /topics/:topic_id/answers
   def create
