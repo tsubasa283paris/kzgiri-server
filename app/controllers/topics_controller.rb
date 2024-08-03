@@ -8,9 +8,9 @@ class TopicsController < ApplicationController
     render json: @topics
   end
 
-  # GET /topics/1
+  # GET /topics/:id
   def show
-    render json: @topic
+    render json: @topic.as_json(include: :answers)
   end
 
   # POST /topics
@@ -18,13 +18,13 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
 
     if @topic.save
-      render json: @topic, status: :created, location: @topic
+      render json: @topic
     else
       render json: @topic.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /topics/1
+  # PATCH/PUT /topics/:id
   def update
     if @topic.update(topic_params)
       render json: @topic
@@ -33,7 +33,7 @@ class TopicsController < ApplicationController
     end
   end
 
-  # DELETE /topics/1
+  # DELETE /topics/:id
   def destroy
     @topic.destroy!
   end
