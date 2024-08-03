@@ -1,18 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: %i[show update destroy]
 
-  # GET /answers
-  def index
-    @answers = Answer.all
-
-    render json: @answers
-  end
-
-  # GET /answers/1
-  def show
-    render json: @answer
-  end
-
   # POST /topics/:topic_id/answers
   def create
     @topic = Topic.find(params[:topic_id])
