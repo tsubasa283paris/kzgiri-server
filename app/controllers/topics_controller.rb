@@ -10,7 +10,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/:id
   def show
-    render json: @topic.as_json(include: :answers)
+    render json: @topic, serializer: TopicsSerializer
   end
 
   # POST /topics
