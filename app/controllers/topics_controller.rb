@@ -5,12 +5,12 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.all
 
-    render json: @topics
+    render json: @topics, each_serializer: TopicsSerializer
   end
 
   # GET /topics/:id
   def show
-    render json: @topic, serializer: TopicsSerializer
+    render json: @topic, serializer: DetailedTopicsSerializer
   end
 
   # POST /topics
@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
 
     if @topic.save
-      render json: @topic
+      render json: @topic, serializer: DetailedTopicsSerializer
     else
       render json: @topic.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class TopicsController < ApplicationController
   # PATCH/PUT /topics/:id
   def update
     if @topic.update(topic_params)
-      render json: @topic
+      render json: @topic, serializer: DetailedTopicsSerializer
     else
       render json: @topic.errors, status: :unprocessable_entity
     end
