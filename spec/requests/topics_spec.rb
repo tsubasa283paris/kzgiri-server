@@ -1,14 +1,28 @@
 require "rails_helper"
 
 RSpec.describe "/topics", type: :request do
+  let(:valid_attribute_text) { "valid text" }
+
+  let(:valid_attribute_published_at) { 61.seconds.from_now.iso8601 }
+
   let(:valid_attributes) do
-    { "text" => "valid text", "published_at" => 1.week.from_now.iso8601 }
+    {
+      "text" => valid_attribute_text,
+      "published_at" => valid_attribute_published_at
+    }
   end
 
-  let(:invalid_attributes) do
+  let(:invalid_attributes_text_too_long) do
     {
       "text" => "too long text#{"-" * 300}",
-      "published_at" => "string invalid as date"
+      "published_at" => valid_attribute_published_at
+    }
+  end
+
+  let(:invalid_attributes_pubat_60s_later) do
+    {
+      "text" => valid_attribute_text,
+      "published_at" => 60.seconds.from_now.iso8601
     }
   end
 
@@ -63,11 +77,32 @@ RSpec.describe "/topics", type: :request do
       end
     end
 
-    context "with invalid parameters" do
+    context "with too long text" do
       it "does raise ActiveRecord::ValueTooLong" do
         expect {
-          post topics_url, params: { topic: invalid_attributes }, as: :json
+          post topics_url,
+               params: {
+                 topic: invalid_attributes_text_too_long
+               },
+               as: :json
         }.to raise_error(ActiveRecord::ValueTooLong)
+      end
+    end
+
+    context "with published_at 60 seconds later" do
+      it "returns status 400 with error message" do
+        post topics_url,
+             params: {
+               topic: invalid_attributes_pubat_60s_later,
+               as: :json
+             }
+        expect(response).to have_http_status(:bad_request)
+        expect(response.content_type).to match(
+          a_string_including("application/json")
+        )
+        expect(
+          response.body
+        ).to include "Parameter 'published_at' must not be a past time."
       end
     end
   end
@@ -92,16 +127,33 @@ RSpec.describe "/topics", type: :request do
       end
     end
 
-    context "with invalid parameters" do
+    context "with too long text" do
       it "does raise ActiveRecord::ValueTooLong" do
         expect {
           patch topic_url(topic),
                 params: {
-                  topic: invalid_attributes
+                  topic: invalid_attributes_text_too_long
                 },
                 headers: valid_headers,
                 as: :json
         }.to raise_error(ActiveRecord::ValueTooLong)
+      end
+    end
+
+    context "with published_at 60 seconds later" do
+      it "returns status 400 with error message" do
+        patch topic_url(topic),
+              params: {
+                topic: invalid_attributes_pubat_60s_later,
+                as: :json
+              }
+        expect(response).to have_http_status(:bad_request)
+        expect(response.content_type).to match(
+          a_string_including("application/json")
+        )
+        expect(
+          response.body
+        ).to include "Parameter 'published_at' must not be a past time."
       end
     end
   end
